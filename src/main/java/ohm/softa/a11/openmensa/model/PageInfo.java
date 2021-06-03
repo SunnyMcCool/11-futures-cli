@@ -3,6 +3,8 @@ package ohm.softa.a11.openmensa.model;
 import okhttp3.Headers;
 import retrofit2.Response;
 
+import java.util.List;
+
 /**
  * Utility class to handle HTTP response header containing the pagination information
  * required to fetch all pages of an entity
@@ -36,11 +38,11 @@ public final class PageInfo {
 	/**
 	 * Factory method to create a PageInfo by parsing the headers of a response which includes the required information
 	 *
-	 * @param apiResponse response object to parse
 	 * @param <T>         concrete response type
+	 * @param apiResponse response object to parse
 	 * @return PageInfo instance - may contain default fallback values see getters
 	 */
-	public static <T extends Response<?>> PageInfo extractFromResponse(T apiResponse) {
+	public static <T extends Response<?>> PageInfo extractFromResponse(Response<List<Canteen>> apiResponse) {
 		Headers headers = apiResponse.headers();
 		int totalPages = extractFromHeaders(headers, TOTAL_PAGES_HEADER, -1);
 		int totalItemCount = extractFromHeaders(headers, TOTAL_ITEM_COUNT_HEADER, -1);
